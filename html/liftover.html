@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Lift Over tool</title>
+	<meta name="author" content="Richard Smith">
+	<!-- Date: 2011-08-03 -->
+
+	<script type="text/javascript" src="jquery-1.6.2.js"></script>          
+	<script type="text/javascript">                                         
+	/*$(document).ready(function() {
+	   	$.ajax({url: 'http://met1:5000/lift/versions/human', dataType: 'jsonp', success: function(data) {
+
+			$.each(data['sources'], function() {
+			    $('#source').append('<input type="radio" name="source" class="version" value="' + this + '" />' + this)
+			  });
+			$('#source').fadeIn('slow')
+	
+			$.each(data['targets'], function() {
+			    $('#target').append('<input type="radio" name="target" class="version" value="' + this + '" />' + this)
+			  });
+			$('#target').fadeIn('slow')
+		}});
+	 });*/
+
+	function fetch_organisms() {
+		var organism = $('#organisms select').find('option:selected').attr('value');
+		$.ajax({url: 'http://met1:5000/lift/versions/' + organism, dataType: 'jsonp', success: function(data) {
+			$('#source').html('');
+			$('#target').html('');
+			$.each(data['sources'], function() {
+			    $('#source').append('<input type="radio" name="source" class="version" value="' + this + '" />' + this)
+			  });
+			$('#source').fadeIn('slow')
+
+			$.each(data['targets'], function() {
+			    $('#target').append('<input type="radio" name="target" class="version" value="' + this + '" />' + this)
+			  });
+			$('#target').fadeIn('slow');
+		}});
+	}
+	
+	$(document).ready(function() {
+		$.ajax({url: 'http://met1:5000/lift/organisms', dataType: 'jsonp', success: function(data) {
+			$('#organisms').append('<select name="organism">');
+			$.each(data['organisms'], function() {
+			    $('#organisms select').append('<option value="' + this + '">' + this + "</option>");
+			});
+			$('#organisms').append('</select>');
+			fetch_organisms();
+			$('#organisms select').change(fetch_organisms);
+			$('#organisms').fadeIn('slow');
+		}});
+	 });
+	</script>
+
+	
+	<style type="text/css">
+		.version {
+	  		margin-left: 10px;
+		}
+		p {
+			font-weight: bold;
+		}
+		h2 {
+			color: orange;
+		}
+	
+	</style>
+	
+</head>
+<body>
+		
+	<h2>Input coordinates to lift over</h2>
+
+	<div id="organisms" style="display:none">
+		<p>Select organism:</p>
+	</div>
+	
+	<form id="lift-form" action="http://met1:5000/lift/human" method="POST">
+		<p>Version of starting coordinates:</p>
+		<div id="source" style="display: none;">
+		</div>
+		<br/>
+		<p>Lift to version:</p>
+		<div id="target" style="display: none;">
+		</div>
+		<p>Input coordinates in BED format:</p>
+		<textarea name="coords" rows="10" cols="40">
+chr3	12328767	12475955
+chr21	43841727	43841927
+chrX	99883567	99895088
+	   	</textarea>
+		<br/>
+	   <input type="submit" value="LIFT"/>
+	</form>
+</body>
+</html>
