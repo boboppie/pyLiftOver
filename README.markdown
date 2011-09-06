@@ -27,9 +27,9 @@ It was written by Richard Smith@InterMine orginally, and integrated to GenomicRe
  
 - You can try a post to the lift over from the command line, e.g.:
 
-   <code>curl -F "coords=@coords.bed" -F "source=hg17" -F "target=hg19" localhost:5000/lift/human</code>
+     <code>curl -F "coords=@coords.bed" -F "source=hg17" -F "target=hg19" localhost:5000/lift/human</code>
 
-  This needs a file called coords.bed under <code>flask/</code>. 
+     This needs a file called coords.bed under <code>flask/</code>. 
 
 - You can also post the intervals to lift over from a html form, try <code>html/liftover.html</code>, put jQuery lib in the same dir
 
