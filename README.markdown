@@ -10,18 +10,18 @@ It was written by Richard Smith@InterMine orginally, and integrated to GenomicRe
 
 ## Installation:
 - Install Flask, <code>easy_install flask</code>
-- Download the <a href="http://hgdownload.cse.ucsc.edu/admin/exe/">liftOver</a> executable and the appropriate <a href="http://hgdownload.cse.ucsc.edu/downloads.html#liftover">chain files</a>, put them under <code>flask/</code> 
+- Download the <a href="http://hgdownload.cse.ucsc.edu/admin/exe/">liftOver</a> executable and the appropriate <a href="http://hgdownload.cse.ucsc.edu/downloads.html#liftover">chain files</a>, put them under <code>flask/</code> or <code>test/</code> 
 - Create isolated Python environments under <code>flask/</code>
 
 ## Usage:
 - to run the webapp under <code>flask/</code>:
 
-    <code>$. env/bin/activate</code>
+    <code>$ . env/bin/activate</code>
   
-    <code>$python lift-over-app.py</code> 
+    <code>$ python lift-over-app.py</code> 
 
 - Only works with BED format at the moment, customize other interval patterns
-- The web service is running on port 5000. Available URLs are:
+- The web service is running on port 5000 for human and mouse specifically. Available URLs are:
     http://locahost:5000/lift/organisms
     http://localhost:5000/lift/versions/human
  
